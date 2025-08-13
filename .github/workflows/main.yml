@@ -38,24 +38,19 @@ jobs:
           DISABLE_ERRORS: true
 
   Docker-image:
-      runs-on: ubuntu-latest
-      needs: [Build]
-      permissions:
-        packages: write
-      steps:
+    runs-on: ubuntu-latest
+    needs: [Build]
+    permissions:
+      packages: write
+    steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Show where the Dockerfile is
-        run: |
-          pwd
-          ls -la
-          find . -maxdepth 3 -iname 'Dockerfile' -o -iname '*.Dockerfile' | sed 's/^/FOUND: /'
-
+      # If your Dockerfile is at app/Dockerfile, the build context should be app/
       - name: Build docker
-        run: bash ci/build-docker.sh
-          
+        run: bash ci/build-docker.sh app/Dockerfile app
 
       - name: Push docker
         run: bash ci/push-docker.sh
+
 
