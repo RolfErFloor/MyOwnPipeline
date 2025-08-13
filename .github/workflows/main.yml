@@ -11,13 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       
-name: Checkout Repository
+    - name: Checkout Repository
       uses: actions/checkout@v5
 
       
-name: run a one-line script
+    - name: run a one-line script
       run: echo Hello World!
-name: run a multi-line script
-run: |
-  echo More actions!
-  echo skibidi!
+    - name: run a multi-line script
+      run: |
+        echo More actions!
+        echo skibidi!
